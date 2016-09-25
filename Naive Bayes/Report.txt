@@ -1,0 +1,34 @@
+Assignment 1 Report
+
+Name:Arpit Nigam
+
+1. Performance on the development data with 100% of the training data
+1a. spam precision: 0.99
+1b. spam recall: 0.98 
+1c. spam F1 score: 0.99
+1d. ham precision: 0.95
+1e. ham recall: 0.98
+1f. ham F1 score: 0.96
+
+2. Performance on the development data with 10% of the training data
+2a. spam precision: 0.99
+2b. spam recall: 0.98
+2c. spam F1 score: 0.99
+2d. ham precision: 0.96
+2e. ham recall: 0.98
+2f. ham F1 score: 0.97
+
+3. Description of enhancement(s) you tried (e.g., different approach(es) to smoothing, treating common words differently, dealing with unknown words differently):
+   Dropping common terms: stop words ['a','an','and','are','as','at','be','by','for','from','has','he','in','is','it','its','of','on','that','the','to','was','were','will','with']   
+   Frequency-based feature selection: Dropping all tokens with low frequency, in my case I tried dropping all tokens with frequency 1.
+   // Important Notes //
+   I have implemented all 3 task in same two files nblearn.py and nbclassify.py and it doesn't hamper working of Task 1 while executing along side with Task 1. I have tested it for dev data and reported figures in this file.
+   I am able to significantly reduce the model size using Frequency based feature selection.
+
+4. Best performance results based on enhancements. Note that these could be the same or worse than the standard implementation.
+4a. spam precision: 0.99
+4b. spam recall: 0.98
+4c. spam F1 score: 0.98
+4d. ham precision: 0.95
+4e. ham recall: 0.98
+4f. ham F1 score: 0.96

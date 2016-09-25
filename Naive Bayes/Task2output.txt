@@ -1,0 +1,7 @@
+--Task2Output--
+spam precision: 0.98
+spam recall: 0.95
+spam F1 score: 0.97
+ham precision: 0.9
+ham recall: 0.96
+ham F1 score: 0.93
