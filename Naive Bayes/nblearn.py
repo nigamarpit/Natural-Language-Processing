@@ -53,7 +53,7 @@ class nbtrain(object):
 		self.wordList=self.hamWordList.copy()
 		self.wordList.extend(self.spamWordList)
 		self.wordDict=dict(Counter(self.wordList))
-		f=open('nbmodel.txt','w+')
+		f=open('nbmodel.txt','w+',encoding='latin1')
 		l=[self.hamCount,self.spamCount,len(self.hamWordList),len(self.spamWordList),len(self.wordDict),self.hamDict,self.spamDict]
 		f.write(str(l))
 		f.close()
@@ -91,7 +91,7 @@ class nbtrain(object):
 		self.wordList2=self.hamWordList2.copy()
 		self.wordList2.extend(self.spamWordList2)
 		self.wordDict2=dict(Counter(self.wordList2))
-		f=open('nbmodel2.txt','w+')
+		f=open('nbmodel2.txt','w+',encoding='latin1')
 		l=[int(self.n),int(self.n),len(self.hamWordList2),len(self.spamWordList2),len(self.wordDict2),self.hamDict2,self.spamDict2]
 		f.write(str(l))
 		f.close()
@@ -122,7 +122,7 @@ class nbtrain(object):
 
 		wordDict=set(hamDict3.keys())|set(spamDict3.keys())
 		l=[self.hamCount,self.spamCount,sum(list(hamDict3.values())),sum(list(spamDict3.values())),len(wordDict),hamDict3,spamDict3]
-		f=open('nbmodel3.txt','w+')
+		f=open('nbmodel3.txt','w+',encoding='latin1')
 		f.write(str(l))
 		f.close()
 
@@ -130,4 +130,4 @@ start_time = time.time()
 #print(start_time)
 nbtrain(sys.argv[1])
 print("Train time: %s "%(time.time() - start_time))
-#python nblearn.py "C:\Users\Xenon\Desktop\Work\csci544\Spam or Ham\train"
+#python nblearn.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Naive Bayes\Spam or Ham\train"

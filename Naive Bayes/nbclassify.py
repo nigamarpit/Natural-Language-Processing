@@ -9,7 +9,7 @@ class nbclassify(object):
 			# TASK 1
 			self.path=path
 			self.res=list()
-			f=open('nbmodel.txt','r',encoding='latin1')
+			f=open('nbmodel.txt','r')
 			l=eval(f.read())
 			f.close()
 			self.P_ham=math.log(l[0]/(l[0]+l[1]))
@@ -196,4 +196,4 @@ start_time = time.time()
 #print(start_time)
 nbclassify(sys.argv[1])
 print("Classify Time: %s "%(time.time() - start_time))
-#python nbclassify.py "C:\Users\Xenon\Desktop\Work\csci544\Spam or Ham\dev"
+#python nbclassify.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Naive Bayes\Spam or Ham\dev"
