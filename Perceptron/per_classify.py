@@ -4,31 +4,18 @@ import os
 import math
 from collections import Counter
 class nbclassify(object):
-	def __init__(self,path):
-		try:
-			# TASK 1
-			self.path=path
-			self.res=list()
-			f=open('nbmodel.txt','r')
-			l=eval(f.read())
-			f.close()
-			self.P_ham=math.log(l[0]/(l[0]+l[1]))
-			self.P_spam=math.log(l[1]/(l[0]+l[1]))
-			self.hamCount=l[0]
-			self.spamCount=l[1]
-			self.hamWordCount=l[2]
-			self.spamWordCount=l[3]
-			self.v=l[4]
-			self.hamDict=l[5]
-			self.spamDict=l[6]
-			self.recursiveRead()
-			self.writeFile()
-			## TASK 2
-			self.task2()
-			### TASK 3
-			self.task3()
-		except:
-			print('Unexpected Error Encountered')
+	def __init__(self,path,outputFile):
+		self.outputFile=outputFile
+		self.path=path
+		f=open('per_model.txt','r',encoding='latin1')
+		l=eval(f.read())
+		f.close()
+		self.bias=l[0]
+		self.model=l[1]
+		self.res=list()
+		self.recursiveRead()
+		self.writeFile()
+
 
 	def recursiveRead(self):
 		for subdir, dirs, files in os.walk(self.path):
@@ -36,7 +23,17 @@ class nbclassify(object):
 				if file.endswith('.txt'):
 					self.res.append(self.fileTest(os.path.join(subdir, file)))
 
-	def fileTest(self,file):		
+	def fileTest(self,file):
+		#print(file)
+		f=open(file,'r',encoding='latin1')		
+		alpha=self.bias
+		for x in f.read().split():
+			alpha+=self.model.get(x,0)
+		if alpha>0:
+			return 'spam'+' '+file
+		else:
+			return 'ham'+' '+file
+		'''
 		p_ham=0
 		p_spam=0
 		f=open(file,'r',encoding='latin1')
@@ -50,14 +47,15 @@ class nbclassify(object):
 		if (p_ham+self.P_ham)>(p_spam+self.P_spam):
 			return ('ham',file)
 		return ('spam',file)
+		'''
 
 	def writeFile(self):
-		f=open('nboutput.txt','w+')
+		f=open(self.outputFile,'w',encoding='latin1')
 		for x in self.res:
-			f.write(str(x[0])+' '+str(x[1])+'\n')
+			f.write(x+'\n')
 		f.close()
 
-	def task2(self):
+'''	def task2(self):
 		f=open('nbmodel2.txt','r',encoding='latin1')
 		l2=eval(f.read())
 		f.close()
@@ -191,9 +189,10 @@ class nbclassify(object):
 		f.write(''.join(res))
 		f.close()
 		print(''.join(res))
+'''
 
 start_time = time.time()
 #print(start_time)
-nbclassify(sys.argv[1])
+nbclassify(sys.argv[1],sys.argv[2])
 print("Classify Time: %s "%(time.time() - start_time))
-#python nbclassify.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Naive Bayes\Spam or Ham\dev"
+#python per_classify.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Perceptron\Spam or Ham\dev" output.txt
