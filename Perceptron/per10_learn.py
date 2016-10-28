@@ -6,13 +6,18 @@ import random
 from collections import Counter
 import traceback
 
-class perTrain(object):
+class per10Train(object):
 	def __init__(self,path):
 		try:
 			self.path=path
+			self.inputSpamFiles=dict()
+			self.inputHamFiles=dict()
 			self.inputFiles=dict()
 			self.feature_words=list()
+			self.fileCount=0
 			self.recursiveRead()
+			self.n=int(self.fileCount/20)
+			self.pickTop10Data()
 			self.weights=dict(Counter(self.feature_words))
 			for key in list(self.weights.keys()):
 				self.weights[key]=0
@@ -30,25 +35,34 @@ class perTrain(object):
 					if file.endswith('.txt'):
 						f=open(os.path.join(subdir, file),'r',encoding='latin1')
 						l=f.read().split()
-						self.inputFiles[str(os.path.join(subdir, file))]=['spam',l]
-						self.feature_words.extend(l)
+						self.inputSpamFiles[str(os.path.join(subdir, file))]=['spam',l]
 						f.close()
+						self.fileCount+=1
 
 			if subdir.endswith('ham'):
 				for file in files:			
 					if file.endswith('.txt'):
 						f=open(os.path.join(subdir, file),'r',encoding='latin1')
 						l=f.read().split()
-						self.inputFiles[str(os.path.join(subdir, file))]=['ham',l]
-						self.feature_words.extend(l)
+						self.inputHamFiles[str(os.path.join(subdir, file))]=['ham',l]
 						f.close()
+						self.fileCount+=1
+
+	def pickTop10Data(self):
+		for x in list(self.inputSpamFiles.keys())[:self.n]:
+			self.inputFiles[x]=self.inputSpamFiles[x]
+			self.feature_words.extend(self.inputSpamFiles[x][1])
+
+		for x in list(self.inputHamFiles.keys())[:self.n]:
+			self.inputFiles[x]=self.inputHamFiles[x]
+			self.feature_words.extend(self.inputHamFiles[x][1])
 
 	def shuffleAndTrain(self):
 		keys=list(self.inputFiles.keys())
 		for i in range(20):
 			random.shuffle(keys)
 			self.train(keys)
-
+			
 		f=open('per_model.txt','w',encoding='latin1')
 		f.write(str([self.bias,self.weights]))
 		f.close()
@@ -72,7 +86,6 @@ class perTrain(object):
 			self.bias+=y
 
 start_time = time.time()
-perTrain(sys.argv[1])
+per10Train(sys.argv[1])
 print("Train time: %s "%(time.time() - start_time))
-#python per_learn.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Perceptron\Spam or Ham\train"
-#python3 per_learn.py "/mnt/c/Users/Xenon/Documents/GitHub/Natural-Language-Processing/Perceptron/Spam or Ham/train"
+#python per10_learn.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Perceptron\Spam or Ham\train"

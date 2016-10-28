@@ -4,20 +4,24 @@ import os
 import copy
 import random
 from collections import Counter
-from collections import defaultdict
+import traceback
 
-class avgPerLearn(object):
+class avgPer10Train(object):
 	def __init__(self,path):
 		try:
 			self.path=path
+			self.inputSpamFiles=dict()
+			self.inputHamFiles=dict()
 			self.inputFiles=dict()
 			self.feature_words=list()
+			self.fileCount=0
 			self.recursiveRead()
+			self.n=int(self.fileCount/20)
+			self.pickTop10Data()
 			self.weights=dict(Counter(self.feature_words))
 			for key in list(self.weights.keys()):
 				self.weights[key]=0
 			self.avg_weights=self.weights.copy()
-			#print(str(self.weights)+'\t'+str(self.avg_weights))
 			self.alpha=0
 			self.bias=0
 			self.u=0
@@ -35,18 +39,27 @@ class avgPerLearn(object):
 					if file.endswith('.txt'):
 						f=open(os.path.join(subdir, file),'r',encoding='latin1')
 						l=f.read().split()
-						self.inputFiles[str(os.path.join(subdir, file))]=['spam',l]
-						self.feature_words.extend(l)
+						self.inputSpamFiles[str(os.path.join(subdir, file))]=['spam',l]
 						f.close()
+						self.fileCount+=1
 
 			if subdir.endswith('ham'):
 				for file in files:			
 					if file.endswith('.txt'):
 						f=open(os.path.join(subdir, file),'r',encoding='latin1')
 						l=f.read().split()
-						self.inputFiles[str(os.path.join(subdir, file))]=['ham',l]
-						self.feature_words.extend(l)
+						self.inputHamFiles[str(os.path.join(subdir, file))]=['ham',l]
 						f.close()
+						self.fileCount+=1
+
+	def pickTop10Data(self):
+		for x in list(self.inputSpamFiles.keys())[:self.n]:
+			self.inputFiles[x]=self.inputSpamFiles[x]
+			self.feature_words.extend(self.inputSpamFiles[x][1])
+
+		for x in list(self.inputHamFiles.keys())[:self.n]:
+			self.inputFiles[x]=self.inputHamFiles[x]
+			self.feature_words.extend(self.inputHamFiles[x][1])
 
 	def shuffleAndTrain(self):
 		files=list(self.inputFiles.keys())
@@ -84,7 +97,6 @@ class avgPerLearn(object):
 			self.beta+=y*self.count
 
 start_time = time.time()
-avgPerLearn(sys.argv[1])
+avgPer10Train(sys.argv[1])
 print("Train time: %s "%(time.time() - start_time))
-#python avg_per_learn.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Perceptron\Spam or Ham\train"
-#python3 avg_per_learn.py "/mnt/c/Users/Xenon/Documents/GitHub/Natural-Language-Processing/Perceptron/Spam or Ham/train"
+#python avg_per10_learn.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Perceptron\Spam or Ham\train"

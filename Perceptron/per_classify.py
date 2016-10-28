@@ -3,7 +3,8 @@ import sys
 import os
 import math
 from collections import Counter
-class nbclassify(object):
+
+class perClassify(object):
 	def __init__(self,path,outputFile):
 		self.outputFile=outputFile
 		self.path=path
@@ -193,6 +194,6 @@ class nbclassify(object):
 
 start_time = time.time()
 #print(start_time)
-nbclassify(sys.argv[1],sys.argv[2])
+perClassify(sys.argv[1],sys.argv[2])
 print("Classify Time: %s "%(time.time() - start_time))
 #python per_classify.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Perceptron\Spam or Ham\dev" output.txt
