@@ -83,8 +83,8 @@ class avgPerLearn(object):
 			self.bias+=y
 			self.beta+=y*self.count
 
-start_time = time.time()
+#start_time = time.time()
 avgPerLearn(sys.argv[1])
-print("Train time: %s "%(time.time() - start_time))
+#print("Train time: %s "%(time.time() - start_time))
 #python avg_per_learn.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Perceptron\Spam or Ham\train"
 #python3 avg_per_learn.py "/mnt/c/Users/Xenon/Documents/GitHub/Natural-Language-Processing/Perceptron/Spam or Ham/train"

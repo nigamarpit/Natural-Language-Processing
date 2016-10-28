@@ -19,6 +19,7 @@ class perTrain(object):
 			self.alpha=0
 			self.bias=0
 			self.shuffleAndTrain()
+
 		except Exception as e:
 			traceback.print_exc()
 			print('Unexpected Error Encountered')
@@ -71,8 +72,8 @@ class perTrain(object):
 				self.weights[word]+=y
 			self.bias+=y
 
-start_time = time.time()
+#start_time = time.time()
 perTrain(sys.argv[1])
-print("Train time: %s "%(time.time() - start_time))
+#print("Train time: %s "%(time.time() - start_time))
 #python per_learn.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Perceptron\Spam or Ham\train"
 #python3 per_learn.py "/mnt/c/Users/Xenon/Documents/GitHub/Natural-Language-Processing/Perceptron/Spam or Ham/train"

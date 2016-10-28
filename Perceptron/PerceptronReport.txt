@@ -1,0 +1,65 @@
+Assignment 2 Report
+
+Name:
+
+Part I.
+
+1. Performance of standard perceptron on the development data with 100% of the training data
+1a. spam precision: 0.99
+1b. spam recall: 0.99
+1c. spam F1 score: 0.99
+1d. ham precision: 0.97
+1e. ham recall: 0.97
+1f. ham F1 score: 0.97
+
+2. Performance of averaged perceptron on the development data with 100% of the training data
+2a. spam precision: 0.98
+2b. spam recall: 0.99
+2c. spam F1 score: 0.98
+2d. ham precision: 0.96
+2e. ham recall: 0.96
+2f. ham F1 score: 0.96
+
+Part II.
+
+3. Performance of standard perceptron on the development data with 10% of the training data
+3a. spam precision: 0.97
+3b. spam recall: 0.97
+3c. spam F1 score: 0.97
+3d. ham precision: 0.92
+3e. ham recall: 0.92
+3f. ham F1 score: 0.92
+
+4. Performance of averaged perceptron on the development data with 10% of the training data
+4a. spam precision: 0.97
+4b. spam recall: 0.96
+4c. spam F1 score: 0.97
+4d. ham precision: 0.91
+4e. ham recall: 0.93
+4f. ham F1 score: 0.92
+
+Part III. You are welcome to reuse code you wrote for assignment 1,
+but we would like to know how you handled the following tasks.
+
+5. How did you calculate precision, recall and F1 score? If you used a
+separate script, please give the name of the script and describe how
+to run it.
+
+Assumption: I am considering the files are in spam and ham folders and not I am not considering by their extensions.
+I have written logic inside the 'per_classify.py' file. In my submission it is commented but it can be run easily just by uncommenting line #20
+
+6. How did you separate 10% of the training data? If you used a
+separate script, please give the name of the script and describe how
+to run it. Explain how you or your code choose the files.
+
+5% of ham file and 5% of spam files i.e., 851 of each (randomly from dictionary). There are two separate files
+1. 'per10_learn.py' : run below command with path of input files
+python per10_learn.py <FilePath>
+2. 'avg_per10_learn.py' : run below command with path of input files
+python avg_per10_learn.py <FilePath>
+
+Explaination:
+Used 2 separate dictionaries for spam and ham files.
+Found total number of files in ham + spam folders.
+TotalFiles/20 to get number of files I need from each dictionary. (here 851)
+Used two list of dictionary keys and read first 851 keys and their values and stored 1702 records/files in a new dictionary and rest processing is almost similar.

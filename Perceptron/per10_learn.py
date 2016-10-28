@@ -62,7 +62,7 @@ class per10Train(object):
 		for i in range(20):
 			random.shuffle(keys)
 			self.train(keys)
-			
+
 		f=open('per_model.txt','w',encoding='latin1')
 		f.write(str([self.bias,self.weights]))
 		f.close()
@@ -85,7 +85,7 @@ class per10Train(object):
 				self.weights[word]+=y
 			self.bias+=y
 
-start_time = time.time()
+#start_time = time.time()
 per10Train(sys.argv[1])
-print("Train time: %s "%(time.time() - start_time))
+#print("Train time: %s "%(time.time() - start_time))
 #python per10_learn.py "C:\Users\Xenon\Documents\GitHub\Natural-Language-Processing\Perceptron\Spam or Ham\train"
