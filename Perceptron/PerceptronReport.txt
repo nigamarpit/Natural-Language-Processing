@@ -1,6 +1,6 @@
 Assignment 2 Report
 
-Name:
+Name: Arpit Nigam
 
 Part I.
 
@@ -45,14 +45,14 @@ but we would like to know how you handled the following tasks.
 separate script, please give the name of the script and describe how
 to run it.
 
-Assumption: I am considering the files are in spam and ham folders and not I am not considering by their extensions.
+Assumption: I am considering the files are in spam and ham folders and I am not considering by their extensions.
 I have written logic inside the 'per_classify.py' file. In my submission it is commented but it can be run easily just by uncommenting line #20
 
 6. How did you separate 10% of the training data? If you used a
 separate script, please give the name of the script and describe how
 to run it. Explain how you or your code choose the files.
 
-5% of ham file and 5% of spam files i.e., 851 of each (randomly from dictionary). There are two separate files
+5% from ham file and 5% from spam files i.e., 851 of each (randomly from dictionary). There are two separate files
 1. 'per10_learn.py' : run below command with path of input files
 python per10_learn.py <FilePath>
 2. 'avg_per10_learn.py' : run below command with path of input files
