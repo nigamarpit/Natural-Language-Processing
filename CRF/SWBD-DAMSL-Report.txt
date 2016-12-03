@@ -3,16 +3,32 @@ Assignment 3 Report
 Name: Arpit Nigam
 
 1. If you included files other than baseline_crf.py, advanced_crf.py, evaluate_model.py, and hw3_corpus_tool.py, or modified hw3_corpus_tool.py please describe what the files do and/or your modifications to hw3_corpus_tool.py.
+I made changes to in get_data function of hw3_corpus_tool.py to yield filename along with utterances in that particular file
 
 2. Describe how you evaluated your baseline and advanced features
-
-Replace this text with a description of how you used the labeled data
-to train and evaluate different models (e.g., moving ~25% data into a
-separate development directory).
+I used 4-fold evaluation technique to evaluate my features
+In order to use train and validation on labelled data change validation flag on line 14 in both baseline and advanced features to True
 
 3. Describe your advanced feature set.
+In addition to baseline features set I tried following feature set:
+a. Token Bigrams
+b. POS Bigrams
+c. Token Trigrams
+d. POS Trigrams
 
 4. If you tried alternate advanced feature sets, please describe them.
+a. Buckets according to length of utterance
+	i. length=0 then 0
+	ii. length<10 then 1
+	iii. length<20 then 2
+	iv. length<30 then 3
+	v. length<40 then 4
+	vi. otherwise 5
+b. Utterance contains '?' then 1 otherwise 0
+c. Utterance starts with 'W' word then 1 otherwise 0
 
 5. Accuracy of baseline features was:
+For 250 iterations of CRF i am getting close to 72.30
+
 6. Accuracy of advanced features was:
+For 250 iterations of CRF i am getting close to 73.0875
